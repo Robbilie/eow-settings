@@ -39,7 +39,7 @@
 			eowEl("webview", { 
 				src: "https://playground.eneticum.de/search/?id=123456543" 
 			})
-			.on("dom-ready", () => this.insertCSS("body, select { background-color: #131313; color: white; }"))
+			.on("dom-ready", function () { this.insertCSS("body, select { background-color: #131313; color: white; }"); })
 		);
 
 		// create zkb tab
@@ -52,9 +52,9 @@
 	function loadRepositoryList (cb) {
 		var repo = {};
 		var githubName = "Robbilie/eow-repository";
-		var githubToken = "db757c5e803d2459dd3723d372027d2d69b71335";
+		var githubToken = "a206b5c8a752122302774ccf8030f08d15bdd1dc";
 		
-		require('js-github/mixins/github-db')(repo, githubName, githubToken);
+		require('js-github/mixins/github-db')(repo, githubName);
 		require('js-git/mixins/create-tree')(repo);
 		require('js-git/mixins/mem-cache')(repo);
 		require('js-git/mixins/read-combiner')(repo);
