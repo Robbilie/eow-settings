@@ -23,11 +23,11 @@
 						eowEl("ul")
 							.appendChildren(list.map(item => 
 								eowEl("li")
-									.appendChildren(
+									.appendChildren([
 										eowEl("h4", { innerHTML: item.name }),
 										eowEl("h5", { innerHTML: item.description }),
 										eowEl("button", { value: `Install ${item.name}` }).on("click", () => loadWidget(item.repository.url))
-									)
+									])
 							))
 					])
 			);
