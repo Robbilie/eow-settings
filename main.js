@@ -11,12 +11,10 @@
 		// debugging
 		console.log("widget", widget);
 
-		var loadWidget = require("remote").require("main.js").loadWidget;
+		var loadWidget = require("remote").require("./main.js").loadWidget;
 
 		loadRepositoryList(list => {
 			// create settings tab
-			var settingsContent = document.createElement("h3");
-				settingsContent.innerHTML = "Settings Tab Content";
 			widget.setTabContent("Settings", 
 				eowEl("div")
 					.appendChildren([
@@ -54,7 +52,7 @@
 	function loadRepositoryList (cb) {
 		var repo = {};
 		var githubName = "Robbilie/eow-repository";
-		var githubToken = "5760edf94e6eb1b4da18555b1378cfe7010d8a7b";
+		var githubToken = "db757c5e803d2459dd3723d372027d2d69b71335";
 		
 		require('js-github/mixins/github-db')(repo, githubName, githubToken);
 		require('js-git/mixins/create-tree')(repo);
