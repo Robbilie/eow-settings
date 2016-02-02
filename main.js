@@ -11,27 +11,18 @@
 		// debugging
 		console.log("widget", widget);
 
-		var loadWidget = require("remote").require("./main.js").loadWidget;
+		// create settings tab
+		widget.setTabContent("Settings", 
+			eowEl("div")
+				.appendChildren([
+					eowEl("h3", { innerHTML: "Settings" }),
+					eowEl("input", { placeholder: "Github Access Token" }).on("input", function () { widget.storeData("accesstoken", this.value); }),
+					eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+					eowEl("ul", { id: "repolist" })
+				])
+		);
 
-		loadRepositoryList(list => {
-			// create settings tab
-			widget.setTabContent("Settings", 
-				eowEl("div")
-					.appendChildren([
-						eowEl("h3", { innerHTML: "Settings" }),
-						eowEl("input"),
-						eowEl("ul")
-							.appendChildren(list.map(item => 
-								eowEl("li")
-									.appendChildren([
-										eowEl("h4", { innerHTML: item.name }),
-										eowEl("h5", { innerHTML: item.description }),
-										eowEl("button", { value: `Install ${item.name}` }).on("click", () => loadWidget(item.repository.url))
-									])
-							))
-					])
-			);
-		});
+		loadRepositoryList(updateList);
 
 		// create test tab
 
@@ -47,27 +38,41 @@
 			src: "https://zkillboard.com/",
 			className: "hideof"
 		}));
-	});
 
-	function loadRepositoryList (cb) {
-		var repo = {};
-		var githubName = "Robbilie/eow-repository";
-		var githubToken = "a206b5c8a752122302774ccf8030f08d15bdd1dc";
-		
-		require('js-github/mixins/github-db')(repo, githubName);
-		require('js-git/mixins/create-tree')(repo);
-		require('js-git/mixins/mem-cache')(repo);
-		require('js-git/mixins/read-combiner')(repo);
-		require('js-git/mixins/formats')(repo);
+		function updateList (list) {
+			var loadWidget = require("remote").require("./main.js").loadWidget;
+			eowEl($("#repolist"))
+				.clear()
+				.appendChildren(list.map(item => 
+					eowEl("li")
+						.appendChildren([
+							eowEl("h4", { innerHTML: item.name }),
+							eowEl("h5", { innerHTML: item.description }),
+							eowEl("button", { innerHTML: `Install ${item.name}` }).on("click", () => loadWidget(item.repository.url))
+						])
+				));
+		}
 
-		repo.readRef("refs/heads/master", (err, headHash) => {
-			repo.loadAs("commit", headHash, (err, commit) => {
-				repo.loadAs("tree", commit.tree, (err, tree) => {
-					repo.loadAs("text", tree["index.json"].hash, (err, fdata) => {
-						var list = JSON.parse(fdata);
-						cb(list);
+		function loadRepositoryList (cb) {
+			var repo = {};
+			var githubName = "Robbilie/eow-repository";
+			var githubToken = widget.loadData("accesstoken");
+			
+			require('js-github/mixins/github-db')(repo, githubName, githubToken);
+			require('js-git/mixins/create-tree')(repo);
+			require('js-git/mixins/mem-cache')(repo);
+			require('js-git/mixins/read-combiner')(repo);
+			require('js-git/mixins/formats')(repo);
+
+			repo.readRef("refs/heads/master", (err, headHash) => {
+				repo.loadAs("commit", headHash, (err, commit) => {
+					repo.loadAs("tree", commit.tree, (err, tree) => {
+						repo.loadAs("text", tree["index.json"].hash, (err, fdata) => {
+							var list = JSON.parse(fdata);
+							cb(list);
+						});
 					});
 				});
 			});
-		});
-	}
+		}
+	});
