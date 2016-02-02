@@ -3,7 +3,7 @@
 
 	Widget.initialize({
 		title: "Settings",
-		tabs: ["Settings", "Auto Complete", "zKillboard"],
+		tabs: ["Settings"],
 		width: 300,
 		height: 400,
 	}, widget => {
@@ -22,15 +22,6 @@
 		);
 
 		loadRepositoryList(updateList);
-
-		// create test tab
-
-		widget.setTabContent("Auto Complete",
-			eowEl("webview", { 
-				src: "https://playground.eneticum.de/search/?id=123456543" 
-			})
-			.on("dom-ready", function () { this.insertCSS("body, select { background-color: #131313; color: white; }"); })
-		);
 
 		function updateList (list) {
 			var loadWidget = require("remote").require("./main.js").loadWidget;
