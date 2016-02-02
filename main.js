@@ -33,12 +33,6 @@
 			.on("dom-ready", function () { this.insertCSS("body, select { background-color: #131313; color: white; }"); })
 		);
 
-		// create zkb tab
-		widget.setTabContent("zKillboard", eowEl("webview", {
-			src: "https://zkillboard.com/",
-			className: "hideof"
-		}));
-
 		function updateList (list) {
 			var loadWidget = require("remote").require("./main.js").loadWidget;
 			eowEl($("#repolist"))
