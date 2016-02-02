@@ -13,9 +13,8 @@
 
 		// create settings tab
 		widget.setTabContent("Settings", 
-			eowEl("div")
+			eowEl("div", { className: "pad" })
 				.appendChildren([
-					eowEl("h3", { innerHTML: "Settings" }),
 					eowEl("input", { placeholder: "Github Access Token", value: (widget.loadData("accesstoken") || "") }).on("input", function () { widget.storeData("accesstoken", this.value); }),
 					eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
 					eowEl("ul", { id: "repolist" })
@@ -40,8 +39,8 @@
 				.appendChildren(list.map(item => 
 					eowEl("li")
 						.appendChildren([
-							eowEl("h4", { innerHTML: item.name }),
-							eowEl("h5", { innerHTML: item.description }),
+							eowEl("h3", { innerHTML: item.name }),
+							eowEl("p", { innerHTML: item.description }),
 							eowEl("button", { innerHTML: `Install ${item.name}` }).on("click", () => loadWidget(item.repository.url))
 						])
 				));
