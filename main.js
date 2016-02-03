@@ -22,6 +22,8 @@
 			]
 		}]);
 
+		widget.appendChild(eowTabs);
+
 		loadRepositoryList(updateList);
 
 		function updateList (list) {
