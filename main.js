@@ -22,7 +22,7 @@
 			]
 		}]);
 
-		widget.appendChild(eowTabs);
+		widget.win.appendChild(tabs);
 
 		loadRepositoryList(updateList);
 
