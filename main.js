@@ -29,6 +29,9 @@
 
 		loadRepositoryList(updateList);
 
+		Widget.loadData("windows").map(url => openWidget(url));
+
+
 		function updateList (list) {
 			eowEl($("#repolist"))
 				.clear()
