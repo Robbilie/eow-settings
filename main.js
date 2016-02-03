@@ -3,7 +3,6 @@
 
 	Widget.initialize({
 		title: "Settings",
-		tabs: ["Settings"],
 		width: 300,
 		height: 400,
 	}, widget => {
@@ -11,15 +10,17 @@
 		// debugging
 		console.log("widget", widget);
 
-		// create settings tab
-		widget.setTabContent("Settings", 
-			eowEl("div", { className: "pad" })
-				.appendChildren([
-					eowEl("input", { placeholder: "Github Access Token", value: (widget.loadData("accesstoken") || "") }).on("input", function () { widget.storeData("accesstoken", this.value); }),
-					eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
-					eowEl("ul", { id: "repolist" })
-				])
-		);
+		var tabs = eowTabs("div", {}, [{
+			name: "Settings",
+			content: [
+				eowEl("div", { className: "pad" })
+					.appendChildren([
+						eowEl("input", { placeholder: "Github Access Token", value: (widget.loadData("accesstoken") || "") }).on("input", function () { widget.storeData("accesstoken", this.value); }),
+						eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+						eowEl("ul", { id: "repolist" })
+					])
+			]
+		}]);
 
 		loadRepositoryList(updateList);
 

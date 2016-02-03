@@ -15,6 +15,7 @@
 		"humane": 		true,
 		"Shepherd": 	true,
 		"eowEl": 		true,
+		"eowTabs": 		true,
 		"AutoComplete": true,
 		"refreshDom": 	true,
 		"click": 		true,
