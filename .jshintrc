@@ -20,6 +20,7 @@
 		"refreshDom": 	true,
 		"click": 		true,
 		"Widget": 		true,
+		"remote": 		true,
 		"require": 		true
 	}
 }

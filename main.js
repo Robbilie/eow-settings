@@ -23,6 +23,9 @@
 			]
 		}]);
 
+		// close app if settings are closed
+		widget.bw.on("close", () => remote.app.quit());
+
 		widget.appendChild(tabs);
 
 		tabs.selectTab("Settings");
