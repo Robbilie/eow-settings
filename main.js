@@ -5,7 +5,7 @@
 		title: "Settings",
 		width: 300,
 		height: 400,
-		controls: ["pin", "size"]
+		controls: ["pin", "size", "close"]
 	}, widget => {
 
 		// debugging
