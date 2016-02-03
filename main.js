@@ -32,7 +32,7 @@
 
 		loadRepositoryList(updateList);
 
-		Widget.loadData("windows").map(url => openWidget(url));
+		(Widget.loadData("windows") || []).map(url => openWidget(url));
 
 
 		function updateList (list) {
@@ -50,8 +50,7 @@
 
 		function openWidget (url) {
 			var loadWidget = require("remote").require("./main.js").loadWidget;
-			var windows = Widget.loadData("windows");
-			if(!windows) windows = [];
+			var windows = Widget.loadData("windows") || [];
 			if(windows.indexOf(url) < 0) {
 				windows.push(url);
 				Widget.storeData("windows", windows);
