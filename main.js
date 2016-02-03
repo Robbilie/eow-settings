@@ -30,7 +30,6 @@
 		loadRepositoryList(updateList);
 
 		function updateList (list) {
-			var loadWidget = require("remote").require("./main.js").loadWidget;
 			eowEl($("#repolist"))
 				.clear()
 				.appendChildren(list.map(item => 
@@ -38,15 +37,25 @@
 						.appendChildren([
 							eowEl("h3", { innerHTML: item.name }),
 							eowEl("p", { innerHTML: item.description }),
-							eowEl("button", { innerHTML: `Install ${item.name}` }).on("click", () => loadWidget(item.repository.url))
+							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => openWidget(item.repository.url))
 						])
 				));
+		}
+
+		function openWidget (url) {
+			var loadWidget = require("remote").require("./main.js").loadWidget;
+			var windows = Widget.loadData("windows");
+			if(windows.indexOf(url) < 0) {
+				windows.push(url);
+				Widget.storeData("windows", windows);
+			}
+			loadWidget(url);
 		}
 
 		function loadRepositoryList (cb) {
 			var repo = {};
 			var githubName = "Robbilie/eow-repository";
-			var githubToken = widget.loadData("accesstoken");
+			var githubToken = Widget.loadData("accesstoken");
 			
 			require('js-github/mixins/github-db')(repo, githubName, githubToken);
 			require('js-git/mixins/create-tree')(repo);
