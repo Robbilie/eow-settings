@@ -24,6 +24,8 @@
 
 		widget.win.appendChild(tabs);
 
+		tabs.selectTab("Settings");
+
 		loadRepositoryList(updateList);
 
 		function updateList (list) {
