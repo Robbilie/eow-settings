@@ -22,7 +22,7 @@
 			]
 		}]);
 
-		widget.win.appendChild(tabs);
+		widget.appendChild(tabs);
 
 		tabs.selectTab("Settings");
 
