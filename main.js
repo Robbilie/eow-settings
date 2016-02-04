@@ -24,7 +24,7 @@
 		updateCore();
 		loadRepositoryList(updateList);
 
-		Object.keys(Widget.loadData("windows") || {}).map(windowID => openWidget(windowID));
+		Object.keys(Widget.loadData("windows") || {}).filter(windowID => windowID != widget.getWindowData("id")).map(windowID => openWidget(windowID));
 
 
 		function updateList (list) {
