@@ -35,19 +35,19 @@
 						.appendChildren([
 							eowEl("h3", { innerHTML: item.name }),
 							eowEl("p", { innerHTML: item.description }),
-							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => openWidget(item.repository.url))
+							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => {
+								openWidget(
+									Widget.saveWidget(
+										Widget.createWidgetData({ urls: [item.repository.url] })
+									)["id"]
+								);
+							})
 						])
 				));
 		}
 
-		function openWidget (url) {
-			var loadWidget = require("remote").require("./main.js").loadWidget;
-			var windows = Widget.loadData("windows") || [];
-			if(windows.filter(window ) indexOf(url) < 0) {
-				windows.push(url);
-				Widget.storeData("windows", windows);
-			}
-			loadWidget(url);
+		function openWidget (windowID) {
+			remote.require("./main.js").loadWidget(windowID);
 		}
 
 		function loadRepositoryList (cb) {
