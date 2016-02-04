@@ -2,10 +2,7 @@
 	"use strict";
 
 	Widget.initialize({
-		title: "Settings",
-		width: 300,
-		height: 400,
-		controls: ["pin", "size", "close"]
+		title: "EOW Settings"
 	}, widget => {
 
 		// debugging
@@ -27,7 +24,7 @@
 		updateCore();
 		loadRepositoryList(updateList);
 
-		(Widget.loadData("windows") || []).map(url => openWidget(url));
+		Object.keys(Widget.loadData("windows") || {}).map(windowID => openWidget(windowID));
 
 
 		function updateList (list) {
@@ -46,7 +43,7 @@
 		function openWidget (url) {
 			var loadWidget = require("remote").require("./main.js").loadWidget;
 			var windows = Widget.loadData("windows") || [];
-			if(windows.indexOf(url) < 0) {
+			if(windows.filter(window ) indexOf(url) < 0) {
 				windows.push(url);
 				Widget.storeData("windows", windows);
 			}
