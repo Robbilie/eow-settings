@@ -11,24 +11,20 @@
 		// debugging
 		console.log("widget", widget);
 
-		var tabs = eowTabs("div", {}, [{
-			name: "Settings",
-			content: [
-				eowEl("div", { className: "pad" })
-					.appendChildren([
-						eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
-						eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
-						eowEl("ul", { id: "repolist" })
-					])
-			]
-		}]);
+		widget.tabs.addTab("Settings", eowEl("div", { className: "pad" })
+			.appendChildren([
+				eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+				eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+				eowEl("ul", { id: "repolist" })
+			])
+		);
 
 		// close app if settings are closed
 		widget.bw.on("close", () => remote.app.quit());
 
-		widget.appendChild(tabs);
+		//widget.appendChild(tabs);
 
-		tabs.selectTab("Settings");
+		widget.tabs.selectTab("Settings");
 
 		updateCore();
 		loadRepositoryList(updateList);
