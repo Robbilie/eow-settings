@@ -149,7 +149,7 @@
 							};
 
 
-							if(localpackage.version != coredata.version) {
+							if(coredata.version > localpackage.version) {
 								storeTree(".", tree);
 							}
 						});
