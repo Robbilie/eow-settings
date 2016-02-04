@@ -26,7 +26,6 @@
 
 		Object.keys(Widget.loadData("windows") || {}).filter(windowID => windowID != widget.getWindowData("id")).map(windowID => openWidget(windowID));
 
-
 		function updateList (list) {
 			eowEl($("#repolist"))
 				.clear()
