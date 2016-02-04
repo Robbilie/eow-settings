@@ -144,7 +144,7 @@
 							var isDone = () => {
 								if(cnt === 0) {
 									console.log("finally done");
-									alert("Successfully updated EOW");
+									alert("Successfully updated EOW. Restart for changes to take effect.");
 								}
 							};
 
