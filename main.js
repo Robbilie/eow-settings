@@ -33,7 +33,7 @@
 							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => {
 								openWidget(
 									Widget.saveWidget(
-										Widget.createWidgetData({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })
+										Widget.createWidget({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })
 									)["id"]
 								);
 							})
