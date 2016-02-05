@@ -1,30 +1,26 @@
 	
 	"use strict";
 
-	Widget.initialize({
-		title: "EOW Settings"
-	}, widget => {
+	Widget.INSTANCE.addPlugin({
+		title: "Settings",
+		name: "Robbilie/eow-settings"
+	}, plugin => {
 
 		// debugging
-		console.log("widget", widget);
+		console.log("plugin", plugin);
 
-		widget.tabs.addTab("Settings", eowEl("div", { className: "pad" })
-			.appendChildren([
-				eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
-				eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
-				eowEl("ul", { id: "repolist" })
-			])
-		);
+		plugin.getBody().appendChildren([
+			eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+			eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+			eowEl("ul", { id: "repolist" })
+		]);
 
-		// close app if settings are closed
-		widget.bw.on("close", () => remote.app.quit());
-
-		widget.tabs.selectTab("Settings");
+		plugin.getWidget().getWindow().on("close", () => remote.app.quit());
 
 		updateCore();
 		loadRepositoryList(updateList);
 
-		Object.keys(Widget.loadData("windows") || {}).filter(windowID => windowID != widget.getWindowData("id")).map(windowID => openWidget(windowID));
+		Object.keys(Widget.loadData("widgets") || {}).filter(widgetID => widgetID != plugin.getWidget().getWidgetData("id")).map(widgetID => openWidget(widgetID));
 
 		function updateList (list) {
 			eowEl($("#repolist"))
@@ -37,7 +33,7 @@
 							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => {
 								openWidget(
 									Widget.saveWidget(
-										Widget.createWidgetData({ urls: [item.repository.url] })
+										Widget.createWidgetData({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })
 									)["id"]
 								);
 							})
