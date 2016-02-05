@@ -1,7 +1,7 @@
 	
 	"use strict";
 
-	Widget.INSTANCE.addPlugin({
+	Widget.INSTANCE.loadPlugin({
 		title: "Settings",
 		name: "Robbilie/eow-settings"
 	}, plugin => {
