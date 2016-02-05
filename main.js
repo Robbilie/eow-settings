@@ -34,7 +34,7 @@
 								openWidget(
 									Widget.saveWidget(
 										Widget.createWidget({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })
-									)["id"]
+									).id
 								);
 							})
 						])
