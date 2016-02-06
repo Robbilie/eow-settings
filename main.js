@@ -9,11 +9,16 @@
 		// debugging
 		console.log("plugin", plugin);
 
-		plugin.getBody().appendChildren([
-			eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
-			eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
-			eowEl("ul", { id: "repolist" })
-		]);
+		plugin
+			.getBody()
+			.appendChild(
+				eowEl("div", { className: "pad" })
+					.appendChildren([
+						eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+						eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+						eowEl("ul", { id: "repolist" })
+					])
+			);
 
 		plugin.getWidget().getWindow().on("close", () => remote.app.quit());
 
