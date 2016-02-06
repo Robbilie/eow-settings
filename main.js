@@ -15,7 +15,9 @@
 				eowEl("div", { className: "pad" })
 					.appendChildren([
 						eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+						eowEl("div", { className: "spacer" }),
 						eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+						eowEl("div", { className: "spacer" }),
 						eowEl("ul", { id: "repolist" })
 					])
 			);
