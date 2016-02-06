@@ -16,7 +16,7 @@
 					.appendChildren([
 						eowEl("input", { placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
 						eowEl("div", { className: "spacer" }),
-						eowEl("button", { innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
+						eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
 						eowEl("div", { className: "spacer" }),
 						eowEl("ul", { id: "repolist" })
 					])
@@ -37,7 +37,7 @@
 						.appendChildren([
 							eowEl("h3", { innerHTML: item.name }),
 							eowEl("p", { innerHTML: item.description }),
-							eowEl("button", { innerHTML: `Open ${item.name}` }).on("click", () => {
+							eowButton({ innerHTML: `Open ${item.name}` }).on("click", () => {
 								openWidget(
 									Widget.saveWidget(
 										Widget.createWidget({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })

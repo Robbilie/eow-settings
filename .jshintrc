@@ -16,6 +16,7 @@
 		"Shepherd": 	true,
 		"eowEl": 		true,
 		"eowTabs": 		true,
+		"eowButton": 	true,
 		"AutoComplete": true,
 		"refreshDom": 	true,
 		"click": 		true,
