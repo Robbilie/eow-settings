@@ -8,6 +8,12 @@
 
 		// debugging
 		console.log("plugin", plugin);
+		
+		var themeSelect = eowDropdown({}).on("toggle", e => {
+			Widget.loadTheme(themeSelect.getSelected());
+		});
+		
+		Object.keys(Widget.THEMES).map(k => themeSelect.addOption(k));
 
 		plugin
 			.getBody()
