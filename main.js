@@ -14,6 +14,7 @@
 		});
 		
 		Object.keys(Widget.THEMES).map(k => themeSelect.addOption(k));
+		themeSelect.setSelected(Widget.getCurrentThemeID());
 
 		plugin
 			.getBody()
