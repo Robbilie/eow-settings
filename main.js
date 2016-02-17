@@ -15,7 +15,7 @@
 
 		var themeSelect = eowDropdown({}).on("toggle", setTheme);
 
-		var themeOpacity = eowRange({ min: 0, max: 100 }).on("input", setTheme);
+		var themeOpacity = eowRange({ min: 0, max: 100, value: 50 }).on("input", setTheme);
 		
 		Object.keys(Widget.THEMES).map(k => themeSelect.addOption(k));
 		themeSelect.setSelected(Widget.getCurrentThemeID());
@@ -48,23 +48,6 @@
 			);
 
 		settingsTabs.selectTab("Plugins");
-		
-		
-		/*
-		plugin
-			.getBody()
-			.appendChild(
-				eowEl("div", { className: "pad" })
-					.appendChildren([
-						eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
-						eowEl("div", { className: "spacer" }),
-						,
-						eowEl("div", { className: "spacer" }),
-						eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
-						eowEl("div", { className: "spacer" }),
-					])
-			);
-		*/
 
 		plugin.getWidget().getWindow().on("close", () => remote.app.quit());
 
