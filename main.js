@@ -67,7 +67,7 @@
 		updateCore();
 		loadRepositoryList(updateList);
 
-		Object.keys(Widget.loadData("widgets") || {}).filter(widgetID => widgetID != plugin.getWidget().getWidgetData("id")).map(widgetID => openWidget(widgetID));
+		Object.keys(Widget.loadData("widgets") || {}).filter(widgetID => widgetID != plugin.getWidget().getWidgetData("id")).map(widgetID => Widget.openWidget(widgetID));
 
 		function updateList (list) {
 			eowEl($("#repolist"))
@@ -78,7 +78,7 @@
 							eowEl("h3", { innerHTML: item.name }),
 							eowEl("p", { innerHTML: item.description }),
 							eowButton({ innerHTML: `Open ${item.name}` }).on("click", () => {
-								openWidget(
+								Widget.openWidget(
 									Widget.saveWidget(
 										Widget.createWidget({ plugins: [item.repository.url.replace("https://github.com/", "").replace(".git", "")] })
 									).id
@@ -88,7 +88,7 @@
 				));
 		}
 
-		var logServer = remote.require("./main.js").logServer;
+		var logServer = Widget.getLogServer();
 			logServer.registerListener("init", 			updateClients);
 			logServer.registerListener("character", 	updateClients);
 			logServer.registerListener("disconnect", 	updateClients);
@@ -104,10 +104,6 @@
 							eowEl("span", { innerHTML: socket.version == 1 ? "Client" : "Launcher" }),
 						])
 				));
-		}
-
-		function openWidget (windowID) {
-			remote.require("./main.js").loadWidget(windowID);
 		}
 
 		function loadRepositoryList (cb) {
