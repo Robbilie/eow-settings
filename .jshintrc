@@ -19,6 +19,7 @@
 		"eowButton": 	true,
 		"eowTextfield": true,
 		"eowDropdown": 	true,
+		"eowRange": 	true,
 		"AutoComplete": true,
 		"refreshDom": 	true,
 		"click": 		true,

@@ -9,9 +9,13 @@
 		// debugging
 		console.log("plugin", plugin);
 		
-		var themeSelect = eowDropdown({}).on("toggle", e => {
-			Widget.loadTheme(themeSelect.getSelected());
-		});
+		var setTheme = e => {
+			Widget.loadTheme(themeSelect.getSelected(), themeOpacity.value / 100);
+		};
+
+		var themeSelect = eowDropdown({}).on("toggle", setTheme);
+
+		var themeOpacity = eowRange({ min: 0, max: 100 }).on("input", setTheme);
 		
 		Object.keys(Widget.THEMES).map(k => themeSelect.addOption(k));
 		themeSelect.setSelected(Widget.getCurrentThemeID());
@@ -37,7 +41,9 @@
 		var themeTab = settingsTabs.addTab("Theme");
 			themeTab.article.appendChild(
 				eowEl("div", { className: "pad" }).appendChildren([
-					themeSelect
+					themeSelect,
+					eowEl("div", { className: "spacer" }),
+					themeOpacity
 				])
 			);
 
