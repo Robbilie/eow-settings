@@ -95,7 +95,7 @@
 
 
 		function updateClients () {
-			eowEl("#clientlist")
+			eowEl($("#clientlist"))
 				.clear()
 				.appendChildren(logServer.getClients().map(socket => 
 					eowEl("div")
