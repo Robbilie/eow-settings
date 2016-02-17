@@ -20,20 +20,26 @@
 		plugin.getBody().appendChild(settingsTabs);
 
 		var pluginsTab = settingsTabs.addTab("Plugins");
-			pluginsTab.article.appendChildren([
-				eowEl("ul", { id: "repolist" }),
-				eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList))
-			]);
+			pluginsTab.article.appendChild(
+				eowEl("div", { className: "pad" }).appendChildren([
+					eowEl("ul", { id: "repolist" }),
+					eowButton({ innerHTML: "Load Repositories", className: "fullwidth" }).on("click", () => loadRepositoryList(updateList))
+				])
+			);
 
 		var tokenTab = settingsTabs.addTab("Tokens");
-			tokenTab.article.appendChildren([
-				eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
-			]);
+			tokenTab.article.appendChild(
+				eowEl("div", { className: "pad" }).appendChildren([
+					eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+				])
+			);
 
 		var themeTab = settingsTabs.addTab("Theme");
-			themeTab.article.appendChildren([
-				themeSelect
-			]);
+			themeTab.article.appendChild(
+				eowEl("div", { className: "pad" }).appendChildren([
+					themeSelect
+				])
+			);
 
 		settingsTabs.selectTab("Plugins");
 		
