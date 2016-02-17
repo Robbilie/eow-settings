@@ -53,6 +53,13 @@
 				])
 			);
 
+		var clientsTab = settingsTabs.addTab("Clients");
+			clientsTab.article.appendChild(
+				eowEl("div", { className: "pad" }).appendChildren([
+					eowEl("ul", { id: "clientlist" })
+				])
+			);
+
 		settingsTabs.selectTab("Plugins");
 
 		plugin.getWidget().getWindow().on("close", () => remote.app.quit());
@@ -77,6 +84,24 @@
 									).id
 								);
 							})
+						])
+				));
+		}
+
+		var logServer = remote.require("./main.js").logServer;
+			logServer.registerListener("init", 			updateClients);
+			logServer.registerListener("character", 	updateClients);
+			logServer.registerListener("disconnect", 	updateClients);
+
+
+		function updateClients () {
+			eowEl("#clientlist")
+				.clear()
+				.appendChildren(logServer.getClients().map(socket => 
+					eowEl("div")
+						.appendChildren([
+							eowEl("span", { innerHTML: socket.version == 1 ? "Client" : "Launcher" }),
+							socket.version == 1 ? eowEl("span", { innerHTML: socket.characterID ? `<img src="https://imageserver.eveonline.com/Character/${socket.characterID}_32.jpg">` : "&lt;no character found&gt;" }) : null
 						])
 				));
 		}
