@@ -24,6 +24,18 @@
 				eowEl("ul", { id: "repolist" }),
 				eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList))
 			]);
+
+		var tokenTab = settingsTabs.addTab("Tokens");
+			tokenTab.article.appendChildren([
+				eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
+			]);
+
+		var themeTab = settingsTabs.addTab("Theme");
+			themeTab.article.appendChildren([
+				themeSelect
+			]);
+
+		settingsTabs.selectTab("Plugins");
 		
 		
 		/*
@@ -34,7 +46,7 @@
 					.appendChildren([
 						eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
 						eowEl("div", { className: "spacer" }),
-						themeSelect,
+						,
 						eowEl("div", { className: "spacer" }),
 						eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
 						eowEl("div", { className: "spacer" }),

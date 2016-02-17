@@ -1,7 +1,7 @@
 {
   "title":        "EOW Settings",
   "description":  "Settings for EOW",
-  "version":      "0.1.017",
+  "version":      "0.1.018",
   "icon":         "blank.png",
   "js":           "main.js",
   "css":          "main.css",
