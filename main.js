@@ -100,8 +100,8 @@
 				.appendChildren(logServer.getClients().map(socket => 
 					eowEl("div")
 						.appendChildren([
+							socket.version == 1 && socket.characterID ? eowEl("img", { src: `https://imageserver.eveonline.com/Character/${socket.characterID}_32.jpg` }) : null,
 							eowEl("span", { innerHTML: socket.version == 1 ? "Client" : "Launcher" }),
-							socket.version == 1 ? eowEl("span", { innerHTML: socket.characterID ? `<img src="https://imageserver.eveonline.com/Character/${socket.characterID}_32.jpg">` : "&lt;no character found&gt;" }) : null
 						])
 				));
 		}

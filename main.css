@@ -1,1 +1,8 @@
 
+#clientlist span {
+	padding: 6px;
+    line-height: 20px;
+    font-size: 20px;
+    vertical-align: top;
+    display: inline-block;
+}
