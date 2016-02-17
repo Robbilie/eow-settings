@@ -10,7 +10,13 @@
 		console.log("plugin", plugin);
 		
 		var setTheme = e => {
-			Widget.loadTheme(themeSelect.getSelected(), themeOpacity.value / 100);
+			let windows = remote.require("./main.js").getWindows();
+			Object
+				.keys(windows)
+				.map(k => windows[k].webContents.send("loadTheme", { 
+					theme: 		themeSelect.getSelected(),
+					opacity: 	themeOpacity.value / 100
+				}));
 		};
 
 		var themeSelect = eowDropdown({}).on("toggle", setTheme);
