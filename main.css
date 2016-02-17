@@ -6,3 +6,7 @@
     vertical-align: top;
     display: inline-block;
 }
+
+#clientlist img {
+	margin-left: -32px;
+}
