@@ -18,6 +18,7 @@
 		"eowTabs": 		true,
 		"eowButton": 	true,
 		"eowTextfield": true,
+		"eowDropdown": 	true,
 		"AutoComplete": true,
 		"refreshDom": 	true,
 		"click": 		true,

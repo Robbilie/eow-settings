@@ -1,4 +1,4 @@
-	
+
 	"use strict";
 
 	Widget.INSTANCE.loadPlugin({
@@ -8,6 +8,13 @@
 
 		// debugging
 		console.log("plugin", plugin);
+		
+		var themeSelect = eowDropdown({}).on("toggle", e => {
+			Widget.loadTheme(themeSelect.getSelected());
+		});
+		
+		Object.keys(Widget.THEMES).map(k => themeSelect.addOption(k));
+		themeSelect.setSelected(Widget.getCurrentThemeID());
 
 		var settingsTabs = eowTabs({}, []);
 		plugin.getBody().appendChild(settingsTabs);
@@ -27,6 +34,9 @@
 					.appendChildren([
 						eowTextfield({ placeholder: "Github Access Token", value: (Widget.loadData("accesstoken") || "") }).on("input", function () { Widget.storeData("accesstoken", this.value); }),
 						eowEl("div", { className: "spacer" }),
+						themeSelect,
+						eowEl("div", { className: "spacer" }),
+						eowButton({ innerHTML: "Load Repositories" }).on("click", () => loadRepositoryList(updateList)),
 						eowEl("div", { className: "spacer" }),
 					])
 			);
