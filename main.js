@@ -39,7 +39,14 @@
 					eowEl("div", { className: "spacer" }),
 					eowEl("div", { className: "spacer" }),
 					eowTextfield({ id: "customrepo", placeholder: "<Repository Owner>/<Repository Name>" }),
-					eowButton({ innerHTML: "Open custom Plugin"}).on("click", () => { Widget.openWidget($("#customrepo").value); })
+					eowEl("div", { className: "spacer" }),
+					eowButton({ innerHTML: "Open custom Plugin"}).on("click", () => { 
+						Widget.openWidget(
+							Widget.saveWidget(
+								Widget.createWidget({ plugins: [$("#customrepo").value] })
+							).id
+						);
+					})
 				])
 			);
 
