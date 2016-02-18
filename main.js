@@ -33,7 +33,13 @@
 			pluginsTab.article.appendChild(
 				eowEl("div", { className: "pad" }).appendChildren([
 					eowEl("ul", { id: "repolist" }),
-					eowButton({ innerHTML: "Load Repositories", className: "fullwidth" }).on("click", () => loadRepositoryList(updateList))
+					eowEl("div", { className: "spacer" }),
+					eowEl("div", { className: "spacer" }),
+					eowButton({ innerHTML: "Load Repositories", className: "fullwidth" }).on("click", () => loadRepositoryList(updateList)),
+					eowEl("div", { className: "spacer" }),
+					eowEl("div", { className: "spacer" }),
+					eowTextfield({ id: "customrepo", placeholder: "<Repository Owner>/<Repository Name>" }),
+					eowButton({ innerHTML: "Open custom Plugin"}).on("click", () => { Widget.openWidget($("#customrepo").value); })
 				])
 			);
 
