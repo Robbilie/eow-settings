@@ -106,7 +106,7 @@
 			logServer.registerListener("character", 	updateClients);
 			logServer.registerListener("disconnect", 	updateClients);
 
-
+		updateClients();
 		function updateClients () {
 			eowEl($("#clientlist"))
 				.clear()
